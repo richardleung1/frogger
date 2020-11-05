@@ -9,8 +9,8 @@ const width = computedStyle.width;
 
 let time = 300;
 function timeCount() {
-    time--;
     timeDisplay.textContent = `Time Left: ${time} seconds`;
+    time--;
 }
 
 game.height = height.replace('px', '')
@@ -111,9 +111,8 @@ const turtles2 = [new Vehicle(0,  50,  "#C6C0C0 ", 50, 25), new Vehicle(125,  50
 
 const logs2 = [new Vehicle(0,  25,  "brown", 75, 25), new Vehicle(150,  25,  "brown", 75, 25), new Vehicle(300,  25,  "brown", 75, 25), new Vehicle(450,  25,  "brown", 75, 25)];
 
-const traffic = [lane1, lane2, lane3, lane4, lane5, lane6, lane7, lane8, lane9, lane10, lane11, lane12, lane13, lane14, lane15]
+const traffic = [lane1, lane2, lane3, lane4, lane5, lane6, lane7, lane8, lane9, lane10, lane11, lane12, lane13, lane14, lane15, water1, water2, water3, water4]
 
-const river = [water1, water2, water3, water4]
 const things = [turtles1, turtles2, logs1, logs2]
 
 const logRiver = [water2, logs1, water4, logs2]
@@ -121,47 +120,66 @@ const turtleRiver = [water1, turtles1, water3, turtles2]
 
 document.getElementById('start').addEventListener('click', function() {
 
-    setInterval(timeCount, 1000);
-    setInterval(rePaint, 1000/100);
-    moveFrog();
-    setInterval(function(){moveVehicle(lane1);}, 12)
-    setInterval(function(){moveVehicle(lane2);}, 14)
-    setInterval(function(){moveVehicle(lane3);}, 11)
-    setInterval(function(){moveVehicle(lane4);}, 12)
-    setInterval(function(){moveVehicle(lane5);}, 10)
-    setInterval(function(){moveVehicle(lane6);}, 15)
-    setInterval(function(){moveVehicle(lane7);}, 14)
-    setInterval(function(){moveVehicle(lane8);}, 13)
-    setInterval(function(){moveVehicle(lane9);}, 12)
-    setInterval(function(){moveVehicle(lane10);}, 10)
-    setInterval(function(){moveVehicle(lane11);}, 9)
-    setInterval(function(){moveVehicle(lane12);}, 15)
-    setInterval(function(){moveVehicle(lane13);}, 13)
-    setInterval(function(){moveVehicle(lane14);}, 12)
-    setInterval(function(){moveVehicle(lane15);}, 10)
-    setInterval(function(){waterFlow(water1, "left");}, 15)
-    setInterval(function(){waterFlow(turtles1, "left");}, 15)
-    setInterval(function(){waterFlow(water2, "right");}, 15)
-    setInterval(function(){waterFlow(logs1, "right");}, 15)
-    setInterval(function(){waterFlow(water3, "left");}, 15)
-    setInterval(function(){waterFlow(turtles2, "left");}, 15)
-    setInterval(function(){waterFlow(water4, "right");}, 15)
-    setInterval(function(){waterFlow(logs2, "right");}, 15)
-    debugger;
-}, { once: true});
+    frog.alive = true
+    document.addEventListener('keyup', moveFrog);
+    let timeInterval = setInterval(timeCount, 1000);
+    let paintInterval = setInterval(rePaint, 1000/100);
+    let trafficInterval = [
+    setInterval(function(){moveVehicle(lane1);}, 12),
+    setInterval(function(){moveVehicle(lane2);}, 14),
+    setInterval(function(){moveVehicle(lane3);}, 11),
+    setInterval(function(){moveVehicle(lane4);}, 12),
+    setInterval(function(){moveVehicle(lane5);}, 10),
+    setInterval(function(){moveVehicle(lane6);}, 15),
+    setInterval(function(){moveVehicle(lane7);}, 14),
+    setInterval(function(){moveVehicle(lane8);}, 13),
+    setInterval(function(){moveVehicle(lane9);}, 12),
+    setInterval(function(){moveVehicle(lane10);}, 10),
+    setInterval(function(){moveVehicle(lane11);}, 9),
+    setInterval(function(){moveVehicle(lane12);}, 15),
+    setInterval(function(){moveVehicle(lane13);}, 13),
+    setInterval(function(){moveVehicle(lane14);}, 12),
+    setInterval(function(){moveVehicle(lane15);}, 10)]
+    
+    let riverInterval = [
+    setInterval(function(){waterFlow(water1, "left");}, 15),
+    setInterval(function(){waterFlow(turtles1, "left");}, 15),
+    setInterval(function(){waterFlow(water2, "right");}, 15),
+    setInterval(function(){waterFlow(logs1, "right");}, 15),
+    setInterval(function(){waterFlow(water3, "left");}, 15),
+    setInterval(function(){waterFlow(turtles2, "left");}, 15),
+    setInterval(function(){waterFlow(water4, "right");}, 15),
+    setInterval(function(){waterFlow(logs2, "right");}, 15)]
 
-function moveFrog() {
-    document.addEventListener('keyup', function(evt) {
-        if (evt.key === 'w') {
-            frog.y -= 25;
-        } else if (evt.key === 'a') {
-            frog.x -= 25;
-        } else if (evt.key === 's') {
-            frog.y += 25;
-        } else if (evt.key === 'd') {
-            frog.x += 25;
-        }
+    document.querySelector('#reset').addEventListener('click', function() {
+        ctx.clearRect(0, 0, game.width, game.height)
+        frog.x = 300
+        frog.y = 575
+        clearInterval(timeInterval)
+        clearInterval(paintInterval)
+        timeDisplay.textContent = '';
+        time = 300
+        trafficInterval.forEach(function (interval) {
+            clearInterval(interval);
+        })
+        riverInterval.forEach(function (interval) {
+            clearInterval(interval);
+        })
+        document.removeEventListener('keyup', moveFrog)
     })
+
+});
+
+function moveFrog(evt) {
+    if (evt.key === 'w') {
+        frog.y -= 25;
+    } else if (evt.key === 'a') {
+        frog.x -= 25;
+    } else if (evt.key === 's') {
+        frog.y += 25;
+    } else if (evt.key === 'd') {
+        frog.x += 25;
+    }
 };
 
 function waterFlow(lane, direction) {
@@ -169,15 +187,20 @@ function waterFlow(lane, direction) {
         if (direction === "left") {
             if (element.x === -element.width) {
                 element.x = 600 - element.width;
-                console.log(element.x)
             } else {
                 element.x -= 1;
+                // if (frog.y === element.y) {
+                //     frog.x -= 1;
+                // }
             }
         } else {
             if (element.x === 600) {
-                element.x = -element.width;
+                element.x = 0;
             } else {
                 element.x += 1;
+                // if (frog.y === element.y) {
+                //     frog.x -= 1;
+                // }
             }
         }
     })
@@ -197,40 +220,14 @@ function detectHit( ) {
     traffic.forEach(function (lane) {
         lane.forEach(function (vehicle) {
             if (frog.x < vehicle.x + vehicle.width
-                && frog.x +frog.width > vehicle.x
+                && frog.x + frog.width > vehicle.x
                 && frog.y < vehicle.y + vehicle.height
-                && frog.y +frog.height > vehicle.y) {
+                && frog.y + frog.height > vehicle.y) {
                 frog.alive = false;
             }
         })
     })
 };
-
-function drown() {
-    river.forEach(function (lane) {
-        lane.forEach(function (water) {
-            if (frog.x < water.x + water.width
-                && frog.x +frog.width > water.x
-                && frog.y < water.y + water.height
-                && frog.y +frog.height > water.y) {
-                frog.alive = false;
-            }
-        })
-    })
-}
-
-// function ride() {
-//     things.forEach(function (lane) {
-//         lane.forEach(function (thing) {
-//             if (frog.x < thing.x + thing.width
-//                 && frog.x +frog.width > thing.x
-//                 && frog.y < thing.y + thing.height
-//                 && frog.y +frog.height > thing.y) {
-//                 if(thing frog.x;
-//             }
-//         })
-//     })
-// }
 
 
 function rePaint() {
@@ -259,6 +256,5 @@ function rePaint() {
         
     }
     detectHit();
-    drown();
 };
 
