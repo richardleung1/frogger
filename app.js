@@ -11,6 +11,9 @@ let time = 300;
 function timeCount() {
     timeDisplay.textContent = `Time Left: ${time} seconds`;
     time--;
+    if (time === 0) {
+        frog.alive = false;
+    }
 }
 
 game.height = height.replace('px', '')
@@ -61,55 +64,55 @@ class Vehicle {
 };
 
 
-const frog = new Player(300,  575,  "#50C878", 25, 25);
+const frog = new Player(300, 575, "#50C878", 25, 25);
 
 const safeLanes = [new Lane(425, "lightgrey"), new Lane(275, "#228B22"), new Lane(125, "#00AB66"), new Lane(0, "#8cc751")]
 
-const lane1 = [new Vehicle(0,  550,  "red", 25, 25), new Vehicle(100,  550,  "orange", 25, 25), new Vehicle(200,  550,  "cyan", 25, 25)];
+const lane1 = [new Vehicle(0, 550, "red", 25, 25), new Vehicle(100, 550, "orange", 25, 25), new Vehicle(200, 550, "cyan", 25, 25)];
 
-const lane2 = [new Vehicle(100,  525,  "red", 25, 25), new Vehicle(250,  525,  "orange", 25, 25), new Vehicle(400,  525,  "cyan", 25, 25)];
+const lane2 = [new Vehicle(100, 525, "red", 25, 25), new Vehicle(250, 525, "orange", 25, 25), new Vehicle(400, 525, "cyan", 25, 25)];
 
-const lane3 = [new Vehicle(125,  500,  "red", 25, 25), new Vehicle(325,  500,  "orange", 25, 25), new Vehicle(525,  500,  "cyan", 25, 25)];
+const lane3 = [new Vehicle(125, 500, "red", 25, 25), new Vehicle(325, 500, "orange", 25, 25), new Vehicle(525, 500, "cyan", 25, 25)];
 
-const lane4 = [new Vehicle(50,  475,  "red", 25, 25), new Vehicle(225,  475,  "orange", 25, 25), new Vehicle(400,  475,  "cyan", 25, 25)];
+const lane4 = [new Vehicle(50, 475, "red", 25, 25), new Vehicle(225, 475, "orange", 25, 25), new Vehicle(400, 475, "cyan", 25, 25)];
 
-const lane5 = [new Vehicle(0,  450,  "red", 25, 25), new Vehicle(200,  450,  "orange", 25, 25), new Vehicle(400,  450,  "cyan", 25, 25)];
+const lane5 = [new Vehicle(0, 450, "red", 25, 25), new Vehicle(200, 450, "orange", 25, 25), new Vehicle(400, 450, "cyan", 25, 25)];
 
-const lane6 = [new Vehicle(0,  400,  "red", 25, 25), new Vehicle(100,  400,  "orange", 25, 25), new Vehicle(200,  400,  "cyan", 25, 25), new Vehicle(300,  400,  "purple", 25, 25)];
+const lane6 = [new Vehicle(0, 400, "red", 25, 25), new Vehicle(100, 400, "orange", 25, 25), new Vehicle(200, 400, "cyan", 25, 25), new Vehicle(300, 400, "purple", 25, 25)];
 
-const lane7 = [new Vehicle(50,  375,  "red", 25, 25), new Vehicle(175,  375,  "orange", 25, 25), new Vehicle(300,  375,  "cyan", 25, 25), new Vehicle(425,  375,  "purple", 25, 25)];
+const lane7 = [new Vehicle(50, 375, "red", 25, 25), new Vehicle(175, 375, "orange", 25, 25), new Vehicle(300, 375, "cyan", 25, 25), new Vehicle(425, 375, "purple", 25, 25)];
 
-const lane8 = [new Vehicle(100,  350,  "red", 25, 25), new Vehicle(250,  350,  "orange", 25, 25), new Vehicle(400,  350,  "cyan", 25, 25), new Vehicle(550,  350,  "purple", 25, 25)];
+const lane8 = [new Vehicle(100, 350, "red", 25, 25), new Vehicle(250, 350, "orange", 25, 25), new Vehicle(400, 350, "cyan", 25, 25), new Vehicle(550, 350, "purple", 25, 25)];
 
-const lane9 = [new Vehicle(0,  325,  "red", 25, 25), new Vehicle(175,  325,  "orange", 25, 25), new Vehicle(350,  325,  "cyan", 25, 25), new Vehicle(525,  325,  "purple", 25, 25)];
+const lane9 = [new Vehicle(0, 325, "red", 25, 25), new Vehicle(175, 325, "orange", 25, 25), new Vehicle(350, 325, "cyan", 25, 25), new Vehicle(525, 325, "purple", 25, 25)];
 
-const lane10 = [new Vehicle(0,  300,  "red", 25, 25), new Vehicle(150,  300,  "orange", 25, 25), new Vehicle(300,  300,  "cyan", 25, 25), new Vehicle(450,  300,  "purple", 25, 25)];
+const lane10 = [new Vehicle(0, 300, "red", 25, 25), new Vehicle(150, 300, "orange", 25, 25), new Vehicle(300, 300, "cyan", 25, 25), new Vehicle(450, 300, "purple", 25, 25)];
 
-const lane11 = [new Vehicle(0,  250,  "red", 40, 25), new Vehicle(300,  250,  "orange", 40, 25)];
+const lane11 = [new Vehicle(0, 250, "red", 40, 25), new Vehicle(300, 250, "orange", 40, 25)];
 
-const lane12 = [new Vehicle(100,  225,  "red", 40, 25), new Vehicle(250,  225,  "orange", 40, 25), new Vehicle(500,  225,  "cyan", 40, 25)];
+const lane12 = [new Vehicle(100, 225, "red", 40, 25), new Vehicle(250, 225, "orange", 40, 25), new Vehicle(500, 225, "cyan", 40, 25)];
 
-const lane13 = [new Vehicle(0,  200,  "red", 40, 25), new Vehicle(200,  200,  "orange", 40, 25), new Vehicle(400,  200,  "cyan", 40, 25)];
+const lane13 = [new Vehicle(0, 200, "red", 40, 25), new Vehicle(200, 200, "orange", 40, 25), new Vehicle(400, 200, "cyan", 40, 25)];
 
-const lane14 = [new Vehicle(0,  175,  "red", 40, 25), new Vehicle(150,  175,  "orange", 40, 25), new Vehicle(300,  175,  "cyan", 40, 25), new Vehicle(450,  175,  "purple", 40, 25)];
+const lane14 = [new Vehicle(0, 175, "red", 40, 25), new Vehicle(150, 175, "orange", 40, 25), new Vehicle(300, 175, "cyan", 40, 25), new Vehicle(450, 175, "purple", 40, 25)];
 
-const lane15 = [new Vehicle(0,  150,  "red", 40, 25), new Vehicle(150,  150,  "orange", 40, 25), new Vehicle(300,  150,  "cyan", 40, 25), new Vehicle(450,  150,  "purple", 40, 25)];
+const lane15 = [new Vehicle(0, 150, "red", 40, 25), new Vehicle(150, 150, "orange", 40, 25), new Vehicle(300, 150, "cyan", 40, 25), new Vehicle(450, 150, "purple", 40, 25)];
 
-const water1 = [new Vehicle(50,  100,  "#35C0ED", 50, 25), new Vehicle(150,  100,  "#35C0ED", 50, 25), new Vehicle(250,  100,  "#35C0ED", 50, 25), new Vehicle(350,  100,  "#35C0ED", 50, 25), new Vehicle(450,  100,  "#35C0ED", 150, 25)];
+const water1 = [new Vehicle(50, 100, "#3FA6F7", 50, 25), new Vehicle(150, 100, "#3FA6F7", 50, 25), new Vehicle(250, 100, "#3FA6F7", 50, 25), new Vehicle(350, 100, "#3FA6F7", 50, 25), new Vehicle(450, 100, "#3FA6F7", 150, 25)];
 
-const water2 = [new Vehicle(0,  75,  "#35C0ED", 50, 25), new Vehicle(150,  75,  "#35C0ED", 50, 25), new Vehicle(300,  75,  "#35C0ED", 50, 25), new Vehicle(450,  75,  "#35C0ED", 50, 25)];
+const water2 = [new Vehicle(0, 75, "#3FA6F7", 50, 25), new Vehicle(150, 75, "#3FA6F7", 50, 25), new Vehicle(300, 75, "#3FA6F7", 50, 25), new Vehicle(450, 75, "#3FA6F7", 50, 25)];
 
-const water3 = [new Vehicle(50,  50,  "#35C0ED", 75, 25), new Vehicle(175,  50,  "#35C0ED", 75, 25), new Vehicle(300,  50,  "#35C0ED", 75, 25), new Vehicle(425,  50,  "#35C0ED", 75, 25), new Vehicle(550,  50,  "#35C0ED", 50, 25)];
+const water3 = [new Vehicle(50, 50, "#3FA6F7", 75, 25), new Vehicle(175, 50, "#3FA6F7", 75, 25), new Vehicle(300, 50, "#3FA6F7", 75, 25), new Vehicle(425, 50, "#3FA6F7", 75, 25), new Vehicle(550, 50, "#3FA6F7", 50, 25)];
 
-const water4 = [new Vehicle(75,  25,  "#35C0ED", 75, 25), new Vehicle(225,  25,  "#35C0ED", 75, 25), new Vehicle(375,  25,  "#35C0ED", 75, 25), new Vehicle(525,  25,  "#35C0ED", 75, 25)];
+const water4 = [new Vehicle(75, 25, "#3FA6F7", 75, 25), new Vehicle(225, 25, "#3FA6F7", 75, 25), new Vehicle(375, 25, "#3FA6F7", 75, 25), new Vehicle(525, 25, "#3FA6F7", 75, 25)];
 
-const turtles1 = [new Vehicle(0,  100,  "#C6C0C0 ", 50, 25), new Vehicle(100,  100,  "#C6C0C0 ", 50, 25), new Vehicle(200,  100,  "#C6C0C0 ", 50, 25), new Vehicle(300,  100,  "#C6C0C0 ", 50, 25), new Vehicle(400,  100,  "#C6C0C0 ", 50, 25)];
+const turtles1 = [new Vehicle(0, 100, "#C6C0C0 ", 50, 25), new Vehicle(100, 100, "#C6C0C0 ", 50, 25), new Vehicle(200, 100, "#C6C0C0 ", 50, 25), new Vehicle(300, 100, "#C6C0C0 ", 50, 25), new Vehicle(400, 100, "#C6C0C0 ", 50, 25)];
 
-const logs1 = [new Vehicle(50,  75,  "brown", 100, 25), new Vehicle(200,  75,  "brown", 100, 25), new Vehicle(350,  75,  "brown", 100, 25), new Vehicle(500,  75,  "brown", 100, 25)];
+const logs1 = [new Vehicle(50, 75, "brown", 100, 25), new Vehicle(200, 75, "brown", 100, 25), new Vehicle(350, 75, "brown", 100, 25), new Vehicle(500, 75, "brown", 100, 25)];
 
-const turtles2 = [new Vehicle(0,  50,  "#C6C0C0 ", 50, 25), new Vehicle(125,  50,  "#C6C0C0 ", 50, 25), new Vehicle(250,  50,  "#C6C0C0 ", 50, 25), new Vehicle(375,  50,  "#C6C0C0 ", 50, 25), new Vehicle(500,  50,  "#C6C0C0 ", 50, 25)];
+const turtles2 = [new Vehicle(0, 50, "#C6C0C0 ", 50, 25), new Vehicle(125, 50, "#C6C0C0 ", 50, 25), new Vehicle(250, 50, "#C6C0C0 ", 50, 25), new Vehicle(375, 50, "#C6C0C0 ", 50, 25), new Vehicle(500, 50, "#C6C0C0 ", 50, 25)];
 
-const logs2 = [new Vehicle(0,  25,  "brown", 75, 25), new Vehicle(150,  25,  "brown", 75, 25), new Vehicle(300,  25,  "brown", 75, 25), new Vehicle(450,  25,  "brown", 75, 25)];
+const logs2 = [new Vehicle(0, 25, "brown", 75, 25), new Vehicle(150, 25, "brown", 75, 25), new Vehicle(300, 25, "brown", 75, 25), new Vehicle(450, 25, "brown", 75, 25)];
 
 const traffic = [lane1, lane2, lane3, lane4, lane5, lane6, lane7, lane8, lane9, lane10, lane11, lane12, lane13, lane14, lane15, water1, water2, water3, water4]
 
@@ -122,8 +125,9 @@ document.getElementById('start').addEventListener('click', function() {
 
     frog.alive = true
     document.addEventListener('keyup', moveFrog);
-    let timeInterval = setInterval(timeCount, 1000);
+    let timeInterval = setInterval(timeCount, 10);
     let paintInterval = setInterval(rePaint, 1000/100);
+
     let trafficInterval = [
     setInterval(function(){moveVehicle(lane1);}, 12),
     setInterval(function(){moveVehicle(lane2);}, 14),
@@ -141,15 +145,16 @@ document.getElementById('start').addEventListener('click', function() {
     setInterval(function(){moveVehicle(lane14);}, 12),
     setInterval(function(){moveVehicle(lane15);}, 10)]
     
-    let riverInterval = [
-    setInterval(function(){waterFlow(water1, "left");}, 15),
-    setInterval(function(){waterFlow(turtles1, "left");}, 15),
-    setInterval(function(){waterFlow(water2, "right");}, 15),
-    setInterval(function(){waterFlow(logs1, "right");}, 15),
-    setInterval(function(){waterFlow(water3, "left");}, 15),
-    setInterval(function(){waterFlow(turtles2, "left");}, 15),
-    setInterval(function(){waterFlow(water4, "right");}, 15),
-    setInterval(function(){waterFlow(logs2, "right");}, 15)]
+    // let riverInterval = [
+    // setInterval(function(){waterFlow(water1, "left");}, 15),
+    // setInterval(function(){waterFlow(turtles1, "left");}, 15),
+    // setInterval(function(){waterFlow(water2, "right");}, 15),
+    // setInterval(function(){waterFlow(logs1, "right");}, 15),
+    // setInterval(function(){waterFlow(water3, "left");}, 15),
+    // setInterval(function(){waterFlow(turtles2, "left");}, 15),
+    // setInterval(function(){waterFlow(water4, "right");}, 15),
+    // setInterval(function(){waterFlow(logs2, "right");}, 15)]
+    
 
     document.querySelector('#reset').addEventListener('click', function() {
         ctx.clearRect(0, 0, game.width, game.height)
@@ -173,11 +178,11 @@ document.getElementById('start').addEventListener('click', function() {
 function moveFrog(evt) {
     if (evt.key === 'w') {
         frog.y -= 25;
-    } else if (evt.key === 'a') {
+    } else if (evt.key === 'a' && frog.x > 0) {
         frog.x -= 25;
-    } else if (evt.key === 's') {
+    } else if (evt.key === 's' && frog.y < 575) {
         frog.y += 25;
-    } else if (evt.key === 'd') {
+    } else if (evt.key === 'd' && frog.x < 575) {
         frog.x += 25;
     }
 };
@@ -216,7 +221,7 @@ function moveVehicle(vehicles) {
     })
 }
 
-function detectHit( ) {
+function detectHit() {
     traffic.forEach(function (lane) {
         lane.forEach(function (vehicle) {
             if (frog.x < vehicle.x + vehicle.width
@@ -229,6 +234,27 @@ function detectHit( ) {
     })
 };
 
+function lossMessage() {
+    ctx.clearRect(0, 0, game.width, game.height)
+    ctx.font = "20px Arial";
+    ctx.fillStyle = "red";
+    ctx.textAlign = "center";
+    ctx.fillText('The frog has died. Please click the reset button to play again.', game.width/2, game.height/2, game.width)
+}
+
+function winMessage() {
+    ctx.clearRect(0, 0, game.width, game.height)
+    ctx.font = "20px Arial";
+    ctx.fillStyle = "green";
+    ctx.textAlign = "center";
+    ctx.fillText('Congratulations! You have reached the island. Please click the reset button to play again.', game.width/2, game.height/2, game.width)
+}
+
+function checkWin() {
+    if (frog.y === 0) {
+        winMessage();
+    }
+}
 
 function rePaint() {
     ctx.clearRect(0, 0, game.width, game.height)
@@ -240,21 +266,16 @@ function rePaint() {
             vehicle.render()
         })
     })
-    logRiver.forEach(function (lane) {
-        lane.forEach(function (water){
-            water.render();
-        })
-    })
-    turtleRiver.forEach(function (lane) {
-        lane.forEach(function (water){
-            water.render();
+    things.forEach(function (lane) {
+        lane.forEach(function (thing){
+            thing.render();
         })
     })
     if (frog.alive) {
         frog.render();
-    // } else {
-        
+    } else {
+        lossMessage()
     }
     detectHit();
+    checkWin();
 };
-
