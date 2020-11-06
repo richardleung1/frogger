@@ -4,7 +4,6 @@ const startDisplay = document.querySelector('#start');
 const restartDisplay = document.querySelector('#restart');
 const frogImg = new Image();
 frogImg.src = 'frog.png'
-const logImg
 
 const computedStyle = getComputedStyle(game);
 const height = computedStyle.height;
