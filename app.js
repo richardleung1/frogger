@@ -1,7 +1,9 @@
 const game = document.querySelector('#game');
 const timeDisplay = document.querySelector('#time');
-const startDisplay = document.querySelector('#start')
-const restartDisplay = document.querySelector('#restart')
+const startDisplay = document.querySelector('#start');
+const restartDisplay = document.querySelector('#restart');
+const img = new Image();
+img.src = 'frog.png'
 
 const computedStyle = getComputedStyle(game);
 const height = computedStyle.height;
@@ -13,25 +15,23 @@ function timeCount() {
     time--;
     if (time === 0) {
         frog.alive = false;
-    }
+    };
 }
 
-game.height = height.replace('px', '')
-game.width = width.replace('px', '')
+game.height = height.replace('px', '');
+game.width = width.replace('px', '');
 const ctx = game.getContext('2d');
 
 class Player {
-    constructor(x, y, color, width, height) {
+    constructor(x, y, width, height) {
         this.x = x;
         this.y = y;
-        this.color = color;
         this.width = width;
         this.height = height;
         this.alive = true;
     }
     render() {
-        ctx.fillStyle = this.color
-        ctx.fillRect(this.x, this.y, this.width, this.height)
+        ctx.drawImage(img, this.x, this.y, this.width, this.height);
     }
 };
 
@@ -44,8 +44,8 @@ class Lane {
         this.height = 25;
     }
     render() {
-        ctx.fillStyle = this.color
-        ctx.fillRect(this.x, this.y, this.width, this.height)
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 };
 
@@ -57,8 +57,8 @@ class Vehicle {
         this.height = height;
     }
     render() {
-        ctx.fillStyle = this.color
-        ctx.fillRect(this.x, this.y, this.width, this.height)
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 };
 
@@ -77,9 +77,9 @@ class Thing {
 };
 
 
-const frog = new Player(300, 575, "green", 25, 25);
+const frog = new Player(300, 575, 25, 25);
 
-const safeLanes = [new Lane(425, "lightgrey"), new Lane(275, "#93BFE2"), new Lane(125, "#593DDA"), new Lane(0, "#87DA3D")]
+const safeLanes = [new Lane(425, "lightgrey"), new Lane(275, "#93BFE2"), new Lane(125, "#593DDA"), new Lane(0, "#87DA3D")];
 
 const lane1 = [new Vehicle(0, 550, 25, 25), new Vehicle(100, 550, 25, 25), new Vehicle(200, 550, 25, 25)];
 
@@ -127,13 +127,13 @@ const turtles2 = [new Thing(0, 50, "#C6C0C0 ", 50, 25), new Thing(125, 50, "#C6C
 
 const logs2 = [new Thing(0, 25, "brown", 75, 25), new Thing(150, 25, "brown", 75, 25), new Thing(300, 25, "brown", 75, 25), new Thing(450, 25, "brown", 75, 25)];
 
-const traffic = [lane1, lane2, lane3, lane4, lane5, lane6, lane7, lane8, lane9, lane10, lane11, lane12, lane13, lane14, lane15]
+const traffic = [lane1, lane2, lane3, lane4, lane5, lane6, lane7, lane8, lane9, lane10, lane11, lane12, lane13, lane14, lane15];
 
-const river = [water1, water2, water3, water4]
-const things = [turtles1, turtles2, logs1, logs2]
+const river = [water1, water2, water3, water4];
+const things = [turtles1, turtles2, logs1, logs2];
 
-const logRiver = [water2, logs1, water4, logs2]
-const turtleRiver = [water1, turtles1, water3, turtles2]
+const logRiver = [water2, logs1, water4, logs2];
+const turtleRiver = [water1, turtles1, water3, turtles2];
 
 traffic.forEach(function (lane) {
     lane.forEach(function (vehicle) {
@@ -143,7 +143,7 @@ traffic.forEach(function (lane) {
 
 document.getElementById('start').addEventListener('click', function() {
 
-    frog.alive = true
+    frog.alive = true;
     document.addEventListener('keyup', moveFrog);
     let timeInterval = setInterval(timeCount, 1000);
     let paintInterval = setInterval(rePaint, 1000/100);
@@ -163,7 +163,7 @@ document.getElementById('start').addEventListener('click', function() {
     setInterval(function(){moveVehicle(lane12);}, 15),
     setInterval(function(){moveVehicle(lane13);}, 13),
     setInterval(function(){moveVehicle(lane14);}, 12),
-    setInterval(function(){moveVehicle(lane15);}, 10)]
+    setInterval(function(){moveVehicle(lane15);}, 10)];
     
     let riverInterval = [
     setInterval(function(){waterFlow(water1, "left");}, 50),
@@ -173,24 +173,24 @@ document.getElementById('start').addEventListener('click', function() {
     setInterval(function(){waterFlow(water3, "left");}, 50),
     setInterval(function(){waterFlow(turtles2, "left");}, 50),
     setInterval(function(){waterFlow(water4, "right");}, 50),
-    setInterval(function(){waterFlow(logs2, "right");}, 50)]
+    setInterval(function(){waterFlow(logs2, "right");}, 50)];
     
 
     document.querySelector('#reset').addEventListener('click', function() {
-        ctx.clearRect(0, 0, game.width, game.height)
-        frog.x = 300
-        frog.y = 575
-        clearInterval(timeInterval)
-        clearInterval(paintInterval)
+        ctx.clearRect(0, 0, game.width, game.height);
+        frog.x = 300;
+        frog.y = 575;
+        clearInterval(timeInterval);
+        clearInterval(paintInterval);
         timeDisplay.textContent = '';
-        time = 150
+        time = 150;
         trafficInterval.forEach(function (interval) {
             clearInterval(interval);
         })
         riverInterval.forEach(function (interval) {
             clearInterval(interval);
         })
-        document.removeEventListener('keyup', moveFrog)
+        document.removeEventListener('keyup', moveFrog);
     })
 
 });
@@ -275,7 +275,7 @@ function detectDrown() {
 
 function checkBorder() {
     if (frog.x < 0 || frog.x > 600) {
-        frog.alive = false
+        frog.alive = false;
     }
 }
 
@@ -307,11 +307,11 @@ function checkWin() {
 function rePaint() {
     ctx.clearRect(0, 0, game.width, game.height)
     safeLanes.forEach(function (lane) {
-        lane.render()
+        lane.render();
     })
     traffic.forEach(function (lane) {
         lane.forEach(function (vehicle) {
-            vehicle.render()
+            vehicle.render();
         })
     })
     river.forEach(function (lane) {
@@ -327,9 +327,9 @@ function rePaint() {
     if (frog.alive) {
         frog.render();
     } else {
-        lossMessage()
+        lossMessage();
     }
     detectHit();
-    detectDrown()
+    detectDrown();
     checkWin();
 };
