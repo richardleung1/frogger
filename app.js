@@ -2,8 +2,9 @@ const game = document.querySelector('#game');
 const timeDisplay = document.querySelector('#time');
 const startDisplay = document.querySelector('#start');
 const restartDisplay = document.querySelector('#restart');
-const img = new Image();
-img.src = 'frog.png'
+const frogImg = new Image();
+frogImg.src = 'frog.png'
+const logImg
 
 const computedStyle = getComputedStyle(game);
 const height = computedStyle.height;
@@ -31,7 +32,7 @@ class Player {
         this.alive = true;
     }
     render() {
-        ctx.drawImage(img, this.x, this.y, this.width, this.height);
+        ctx.drawImage(frogImg, this.x, this.y, this.width, this.height);
     }
 };
 
