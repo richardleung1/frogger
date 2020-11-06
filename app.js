@@ -11,10 +11,11 @@ const width = computedStyle.width;
 
 let time = 150;
 function timeCount() {
-    timeDisplay.textContent = `Time Left: ${time} seconds`;
+    timeDisplay.textContent = `Time Left: ${time} seconds
+    Lives: ${frog.lives}`;
     time--;
     if (time === 0) {
-        frog.alive = false;
+        frog.lives = 0;
     };
 }
 
@@ -28,7 +29,7 @@ class Player {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.alive = true;
+        this.lives = 3;
     }
     render() {
         ctx.drawImage(frogImg, this.x, this.y, this.width, this.height);
@@ -143,7 +144,9 @@ traffic.forEach(function (lane) {
 
 document.getElementById('start').addEventListener('click', function() {
 
-    frog.alive = true;
+    frog.lives = 3;
+    frog.x = 300;
+    frog.y = 575;
     document.addEventListener('keyup', moveFrog);
     let timeInterval = setInterval(timeCount, 1000);
     let paintInterval = setInterval(rePaint, 1000/100);
@@ -178,8 +181,6 @@ document.getElementById('start').addEventListener('click', function() {
 
     document.querySelector('#reset').addEventListener('click', function() {
         ctx.clearRect(0, 0, game.width, game.height);
-        frog.x = 300;
-        frog.y = 575;
         clearInterval(timeInterval);
         clearInterval(paintInterval);
         timeDisplay.textContent = '';
@@ -215,8 +216,8 @@ function waterFlow(lane, direction) {
             } else {
                 element.x -= 1;
                 if ((lane === turtles1 || lane === turtles2)
-                && frog.x >= element.x
-                && frog.x + frog.width <= element.x + element.width 
+                && frog.x >= element.x - 12.5
+                && frog.x + frog.width <= element.x + element.width + 12.5
                 && frog.y === element.y) {
                     frog.x -= 1;
                 }
@@ -227,8 +228,8 @@ function waterFlow(lane, direction) {
             } else {
                 element.x += 1;
                 if ((lane === logs1 || lane === logs2)
-                && frog.x >= element.x
-                && frog.x + frog.width <= element.x + element.width 
+                && frog.x >= element.x -12.5
+                && frog.x + frog.width <= element.x + element.width +12.5
                 && frog.y === element.y) {
                     frog.x += 1;
                 }
@@ -254,7 +255,17 @@ function detectHit() {
                 && frog.x + frog.width > vehicle.x
                 && frog.y < vehicle.y + vehicle.height
                 && frog.y + frog.height > vehicle.y) {
-                frog.alive = false;
+                frog.lives--;
+                if (frog.y > 425 && frog.y < 575) {
+                    frog.x = 300;
+                    frog.y = 575;
+                } else if (frog.y > 275 && frog.y < 425) {
+                    frog.x = 300;
+                    frog.y = 425;
+                } else if (frog.y > 125 && frog.y < 275) {
+                    frog.x = 300;
+                    frog.y = 275;
+                }
             }
         })
     })
@@ -263,11 +274,13 @@ function detectHit() {
 function detectDrown() {
     river.forEach(function (lane) {
         lane.forEach(function (water) {
-            if (frog.x < water.x + water.width
-                && frog.x + frog.width > water.x
+            if (frog.x < water.x + water.width - 12.5
+                && frog.x + frog.width > water.x + 12.5
                 && frog.y < water.y + water.height
                 && frog.y + frog.height > water.y) {
-                frog.alive = false;
+                frog.lives--;
+                frog.x = 300;
+                frog.y = 125;
             }
         })
     })
@@ -275,7 +288,9 @@ function detectDrown() {
 
 function checkBorder() {
     if (frog.x < 0 || frog.x > 600) {
-        frog.alive = false;
+        frog.lives--;
+                frog.x = 300;
+                frog.y = 125;
     }
 }
 
@@ -324,7 +339,7 @@ function rePaint() {
             thing.render();
         })
     })
-    if (frog.alive) {
+    if (frog.lives > 0) {
         frog.render();
     } else {
         lossMessage();
