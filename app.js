@@ -273,6 +273,12 @@ function detectDrown() {
     })
 };
 
+function checkBorder() {
+    if (frog.x < 0 || frog.x > 600) {
+        frog.alive = false
+    }
+}
+
 function lossMessage() {
     ctx.clearRect(0, 0, game.width, game.height);
     timeDisplay.textContent = '';
@@ -284,7 +290,7 @@ function lossMessage() {
 
 function winMessage() {
     ctx.clearRect(0, 0, game.width, game.height);
-    let score = Math.floor(1000 / frog.x);
+    let score = Math.floor(100000 / frog.x);
     timeDisplay.textContent = `Score: ${score}`;
     ctx.font = "20px Arial";
     ctx.fillStyle = "green";
