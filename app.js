@@ -225,7 +225,7 @@ function waterFlow(lane, direction) {
     lane.forEach(function (element) {
         if (direction === "left") {
             if (element.x === -element.width) {
-                element.x = 600 - element.width;
+                element.x = 600;
             } else {
                 element.x -= 1;
                 if ((lane === turtles1 || lane === turtles2)
@@ -237,7 +237,7 @@ function waterFlow(lane, direction) {
             }
         } else {
             if (element.x === 600) {
-                element.x = 0;
+                element.x = -element.width;
             } else {
                 element.x += 1;
                 if ((lane === logs1 || lane === logs2)

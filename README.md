@@ -2,6 +2,9 @@
 
 Frogger is a computer game which the objective is to help the frog reach its home by crossing the dangerous roads and a dangerous river.
 
+# Live Site
+https://richardleung1.github.io/
+
 # Table of Contents
 [How To Play](#how-to-play)</br>
 [HTML](#HTML)</br>
