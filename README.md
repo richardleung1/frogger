@@ -16,7 +16,7 @@ https://richardleung1.github.io/
 [Javascript Functions](#javascript-functions)</br>
 
 # How To Play
-To begin, click the Start the game button. The frog will appear on the bottom center of the canvas. The frog moves by the awsd keys. The frog needs to croos the roads and river to reach its home. The frog needs to avoid the vehicles and ride the thing on the river. After you've won or lost, click the reset button to clear the screen. Then, click the start the game button to play again. The score is calculated by the using the time taken, lives remaining and the x coordinate of the frog.
+To begin, click the Start the game button. The frog will appear on the bottom center of the canvas. The frog moves by the awsd keys. The frog needs to cross the roads and river to reach its home. The frog needs to avoid the vehicles and ride the thing on the river. After you've won or lost, click the reset button to clear the screen. Then, click the start the game button to play again. The score is calculated by the using the lives remaining and the x coordinate of the frog.
 
 # HTML
 The container div holds the canvas element and aside elements. The footer holds the instructions, my github link, and an embeded link to a spotify playlist.
