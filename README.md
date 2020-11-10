@@ -4,7 +4,6 @@ Frogger is a computer game which the objective is to help the frog reach its hom
 
 # Table of Contents
 [How To Play](#how-to-play)</br>
-[Code Breakdown](#code-breakdown)</br>
 [HTML](#HTML)</br>
 [CSS](#CSS)</br>
 [JAVASCRIPT](#JAVASCRIPT)</br>
