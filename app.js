@@ -329,7 +329,7 @@ function lossMessage() {
 
 function winMessage() {
     ctx.clearRect(0, 0, game.width, game.height);
-    let score = Math.floor(100000 / frog.x * frog.lives);
+    let score = Math.floor(100000 * frog.lives / frog.x);
     timeDisplay.textContent = `Score: ${score}`;
     ctx.font = "20px Arial";
     ctx.fillStyle = "green";
