@@ -6,25 +6,19 @@ const frogImg = new Image();
 frogImg.src = 'images/frog.png'
 const waterImg = new Image();
 waterImg.src = 'images/water.jpg'
-
+const logImg = new Image();
+logImg.src = 'images/log.png'
+const turtleImg = new Image();
+turtleImg.src = 'images/turtle.png'
 
 const computedStyle = getComputedStyle(game);
 const height = computedStyle.height;
 const width = computedStyle.width;
 
-let time = 150;
-function timeCount() {
-    timeDisplay.textContent = `Time Left: ${time} seconds
-    Lives: ${frog.lives}`;
-    time--;
-    if (time === 0) {
-        frog.lives = 0;
-    };
-}
-
 game.height = height.replace('px', '');
 game.width = width.replace('px', '');
 const ctx = game.getContext('2d');
+
 
 class Player {
     constructor(x, y, width, height) {
@@ -78,24 +72,34 @@ class River {
     }
 };
 
-class Thing {
-    constructor(x, y, color, width, height) {
+class Log {
+    constructor(x, y, width, height) {
         this.x = x;
         this.y = y;
-        this.color = color;
         this.width = width;
         this.height = height;
     }
     render() {
-        ctx.fillStyle = this.color
-        ctx.fillRect(this.x, this.y, this.width, this.height)
+        ctx.drawImage(logImg, this.x, this.y, this.width, this.height);
     }
 };
 
+class Turtle {
+    constructor(x, y, width, height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+    render() {
+        ctx.drawImage(turtleImg, this.x, this.y, this.width / 2, this.height);
+        ctx.drawImage(turtleImg, this.x + this.width / 2, this.y, this.width / 2, this.height);
+    }
+};
 
 const frog = new Player(300, 575, 25, 25);
 
-const safeLanes = [new Lane(425, "lightgrey"), new Lane(275, "#93BFE2"), new Lane(125, "#593DDA"), new Lane(0, "#87DA3D")];
+const safeLanes = [new Lane(575, "white"), new Lane(425, "lightgrey"), new Lane(275, "#93BFE2"), new Lane(125, "#593DDA"), new Lane(0, "#87DA3D")];
 
 const lane1 = [new Vehicle(0, 550, 25, 25), new Vehicle(100, 550, 25, 25), new Vehicle(200, 550, 25, 25)];
 
@@ -129,13 +133,13 @@ const lane15 = [new Vehicle(0, 150, 40, 25), new Vehicle(150, 150, 40, 25), new 
 
 const river = new River(0, 25, 600, 100)
 
-const turtles1 = [new Thing(0, 100, "#C6C0C0 ", 50, 25), new Thing(100, 100, "#C6C0C0 ", 50, 25), new Thing(200, 100, "#C6C0C0 ", 50, 25), new Thing(300, 100, "#C6C0C0 ", 50, 25), new Thing(400, 100, "#C6C0C0 ", 50, 25)];
+const turtles1 = [new Turtle(0, 100, 50, 25), new Turtle(100, 100, 50, 25), new Turtle(200, 100, 50, 25), new Turtle(300, 100, 50, 25), new Turtle(400, 100, 50, 25)];
 
-const logs1 = [new Thing(50, 75, "brown", 100, 25), new Thing(200, 75, "brown", 100, 25), new Thing(350, 75, "brown", 100, 25), new Thing(500, 75, "brown", 100, 25)];
+const turtles2 = [new Turtle(0, 50, 50, 25), new Turtle(125, 50, 50, 25), new Turtle(250, 50, 50, 25), new Turtle(375, 50, 50, 25), new Turtle(500, 50, 50, 25)];
 
-const turtles2 = [new Thing(0, 50, "#C6C0C0 ", 50, 25), new Thing(125, 50, "#C6C0C0 ", 50, 25), new Thing(250, 50, "#C6C0C0 ", 50, 25), new Thing(375, 50, "#C6C0C0 ", 50, 25), new Thing(500, 50, "#C6C0C0 ", 50, 25)];
+const logs1 = [new Log(50, 75, 100, 25), new Log(200, 75, 100, 25), new Log(350, 75, 100, 25), new Log(500, 75, 100, 25)];
 
-const logs2 = [new Thing(0, 25, "brown", 75, 25), new Thing(150, 25, "brown", 75, 25), new Thing(300, 25, "brown", 75, 25), new Thing(450, 25, "brown", 75, 25)];
+const logs2 = [new Log(0, 25, 75, 25), new Log(150, 25, 75, 25), new Log(300, 25, 75, 25), new Log(450, 25, 75, 25)];
 
 const traffic = [lane1, lane2, lane3, lane4, lane5, lane6, lane7, lane8, lane9, lane10, lane11, lane12, lane13, lane14, lane15];
 
@@ -149,6 +153,7 @@ traffic.forEach(function (lane) {
 
 document.getElementById('start').addEventListener('click', function() {
 
+    time = 150;
     frog.lives = 3;
     frog.x = 300;
     frog.y = 575;
@@ -178,14 +183,12 @@ document.getElementById('start').addEventListener('click', function() {
     setInterval(function(){waterFlow(logs1, "right");}, 50),
     setInterval(function(){waterFlow(turtles2, "left");}, 50),
     setInterval(function(){waterFlow(logs2, "right");}, 50)];
-    
 
     document.querySelector('#reset').addEventListener('click', function() {
         ctx.clearRect(0, 0, game.width, game.height);
         clearInterval(timeInterval);
         clearInterval(paintInterval);
         timeDisplay.textContent = '';
-        time = 150;
         trafficInterval.forEach(function (interval) {
             clearInterval(interval);
         })
@@ -194,8 +197,17 @@ document.getElementById('start').addEventListener('click', function() {
         })
         document.removeEventListener('keyup', moveFrog);
     })
-
 });
+
+let time = 150;
+function timeCount() {
+    timeDisplay.textContent = `Time Left: ${time} seconds
+    Lives: ${frog.lives}`;
+    time--;
+    if (time === 0) {
+        frog.lives = 0;
+    };
+};
 
 function moveFrog(evt) {
     if (evt.key === 'w') {
@@ -322,7 +334,7 @@ function winMessage() {
     ctx.font = "20px Arial";
     ctx.fillStyle = "green";
     ctx.textAlign = "center";
-    ctx.fillText('Congratulations! You have reached the island. Please click the reset button to play again.', game.width/2, game.height/2, game.width);
+    ctx.fillText('Congratulations! The frog has reached its home. Please click the reset button to play again.', game.width/2, game.height/2, game.width);
 }
 
 function checkWin() {
@@ -342,6 +354,7 @@ function rePaint() {
         })
     })
     river.render();
+
     things.forEach(function (lane) {
         lane.forEach(function (thing){
             thing.render();
