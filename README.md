@@ -2,23 +2,23 @@
 
 Frogger is a computer game which the objective is to help the frog reach its home by crossing the dangerous roads and a dangerous river.
 
-## Table of Contents
-[How To Play](##How To Play)
-[Code Breakdown](##Code Breakdown)
-[HTML](###HTML)
-[CSS](###CSS)
-[JAVASCRIPT](###JAVASCRIPT)
-[Constructor Methods](####Constructor Methods)
-[Event Listeners](####Event Listeners)
-[Functions](####Functions)
-[Javascript Functions](###Javascript Functions)
+# Table of Contents
+[How To Play](#HowToPlay)
+[Code Breakdown](#CodeBreakdown)
+[HTML](#HTML)
+[CSS](#CSS)
+[JAVASCRIPT](#JAVASCRIPT)
+[Constructor Methods](#ConstructorMethods)
+[Event Listeners](#EventListeners)
+[Functions](#Functions)
+[Javascript Functions](#JavascriptFunctions)
 
-## How To Play
+# How To Play
 To begin, click the Start the game button. The frog will appear on the bottom center of the canvas. The frog moves by the awsd keys. The frog needs to croos the roads and river to reach its home. The frog needs to avoid the vehicles and ride the thing on the river. After you've won or lost, click the reset button to clear the screen. Then, click the start the game button to play again. The score is calculated by the using the time taken, lives remaining and the x coordinate of the frog.
 
-## Code Breakdown
+# Code Breakdown
 
-### HTML
+# HTML
 The container div holds the canvas element and aside elements. The footer holds the instructions, my github link, and an embeded link to a spotify playlist.
 ```html
 <div id="container">
@@ -38,7 +38,7 @@ The container div holds the canvas element and aside elements. The footer holds 
 </footer>
 ```
 
-### CSS
+# CSS
 The CSS formats the container and other elements.
 ```css
 html,body {
@@ -121,7 +121,8 @@ footer {
 }
 ```
 
-### JAVASCRIPT
+# JAVASCRIPT
+# Constructor Methods
 Constructor methods used to create objects
 ```javascript
 class Player {
@@ -202,6 +203,7 @@ class Turtle {
 };
 ```
 
+# Event Listeners
 A click event listener is added to the start button which calls the functions at  specific intervals and reassign variables. A click event listener is added to the reset button which clears the canvas and intervals and removes the keyup event listener.
 ```javascript
 document.getElementById('start').addEventListener('click', function() {
@@ -252,7 +254,7 @@ document.getElementById('start').addEventListener('click', function() {
     })
 });
 ```
-#### Functions
+# Functions
 The functions help paint the canvas, move the objects on screen, and detect collision.
 ```javascript
 function timeCount() {
@@ -427,7 +429,7 @@ function rePaint() {
 };
 ```
 
-### Javascript Functions
+# Javascript Functions
 
 | Functions | Description |
 | ----------- | ----------- |
