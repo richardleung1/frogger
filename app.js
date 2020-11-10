@@ -184,19 +184,10 @@ document.getElementById('start').addEventListener('click', function() {
     setInterval(function(){waterFlow(turtles2, "left");}, 50),
     setInterval(function(){waterFlow(logs2, "right");}, 50)];
 
-    document.querySelector('#reset').addEventListener('click', function() {
-        ctx.clearRect(0, 0, game.width, game.height);
-        clearInterval(timeInterval);
-        clearInterval(paintInterval);
-        timeDisplay.textContent = '';
-        trafficInterval.forEach(function (interval) {
-            clearInterval(interval);
-        })
-        riverInterval.forEach(function (interval) {
-            clearInterval(interval);
-        })
-        document.removeEventListener('keyup', moveFrog);
-    })
+});
+
+document.querySelector('#reset').addEventListener('click', function() {
+    location.reload()
 });
 
 let time = 150;
@@ -225,7 +216,7 @@ function waterFlow(lane, direction) {
     lane.forEach(function (element) {
         if (direction === "left") {
             if (element.x === -element.width) {
-                element.x = 600;
+                element.x = 600 - element.width;
             } else {
                 element.x -= 1;
                 if ((lane === turtles1 || lane === turtles2)
@@ -237,7 +228,7 @@ function waterFlow(lane, direction) {
             }
         } else {
             if (element.x === 600) {
-                element.x = -element.width;
+                element.x = 0;
             } else {
                 element.x += 1;
                 if ((lane === logs1 || lane === logs2)
@@ -254,7 +245,7 @@ function waterFlow(lane, direction) {
 function moveVehicle(vehicles) {
     vehicles.forEach(function (vehicle) {
         if (vehicle.x < -vehicle.width) {
-            vehicle.x += (600 + vehicle.width);
+            vehicle.x = 600;
         } else {
             vehicle.x -= 1;
         }
@@ -329,7 +320,7 @@ function lossMessage() {
 
 function winMessage() {
     ctx.clearRect(0, 0, game.width, game.height);
-    let score = Math.floor(100000 * frog.lives / frog.x);
+    let score = Math.floor(100000 / frog.x * frog.lives);
     timeDisplay.textContent = `Score: ${score}`;
     ctx.font = "20px Arial";
     ctx.fillStyle = "green";

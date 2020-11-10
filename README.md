@@ -204,7 +204,7 @@ class Turtle {
 ```
 
 # Event Listeners
-A click event listener is added to the start button which calls the functions at  specific intervals and reassign variables. A click event listener is added to the reset button which clears the canvas and intervals and removes the keyup event listener.
+A click event listener is added to the start button which calls the functions at  specific intervals and reassign variables. A click event listener is added to the reset button which reloads the page.
 ```javascript
 document.getElementById('start').addEventListener('click', function() {
 
@@ -238,20 +238,10 @@ document.getElementById('start').addEventListener('click', function() {
     setInterval(function(){waterFlow(logs1, "right");}, 50),
     setInterval(function(){waterFlow(turtles2, "left");}, 50),
     setInterval(function(){waterFlow(logs2, "right");}, 50)];
+});
 
-    document.querySelector('#reset').addEventListener('click', function() {
-        ctx.clearRect(0, 0, game.width, game.height);
-        clearInterval(timeInterval);
-        clearInterval(paintInterval);
-        timeDisplay.textContent = '';
-        trafficInterval.forEach(function (interval) {
-            clearInterval(interval);
-        })
-        riverInterval.forEach(function (interval) {
-            clearInterval(interval);
-        })
-        document.removeEventListener('keyup', moveFrog);
-    })
+document.querySelector('#reset').addEventListener('click', function() {
+    location.reload()
 });
 ```
 # Functions
